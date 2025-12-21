@@ -10,3 +10,4 @@ const hola = new Production("Hola", "Hola", naci, "a", "image")
 
 console.log(hola.toString())
 
+
