@@ -51,7 +51,7 @@ class Production {
 
     set sypnopsis(v){
         if(typeof v !== 'string') {
-            throw new Error("Error en la sipnopsis")
+            throw new Error("Error en la sypnopsis")
         }
         this.#sypnopsis = v
     }

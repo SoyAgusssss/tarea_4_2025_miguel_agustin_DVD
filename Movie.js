@@ -6,7 +6,7 @@ class Movie extends Production {
     #resource
     #locations
     constructor(title, nationality, publication, sypnopsis, image, resource = null, locations = []) {
-        super(resource, locations)
+        super(title, nationality, publication, sypnopsis, image)
         this.resource = resource
         this.locations = locations
     }
@@ -43,6 +43,8 @@ class Movie extends Production {
         return `Produccion: ${super.toString()} | Recurso: ${this.resource} | Localización: ${this.locations} `
     }
 }
+
+export default Movie
 
 /*
 1.5. Objeto Movie
