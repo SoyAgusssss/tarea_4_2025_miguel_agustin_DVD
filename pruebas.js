@@ -4,6 +4,7 @@ import Resource from "./Resource.js"
 import Production from "./Production.js"
 import Movie from "./Movie.js"
 import Coordinate from "./Coordinate.js"
+import Coordinate from "./Coordinate.js"
 
 const naci = new Date(2025,11,12)
 

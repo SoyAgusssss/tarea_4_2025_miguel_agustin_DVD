@@ -1,6 +1,8 @@
 import Category from "./Category.js"
 import User from "./User.js"
 import Production from "./Production.js"
+import Person from "./Person.js"
+
 
 class VideoSystem {
     static #instance
@@ -10,6 +12,7 @@ class VideoSystem {
     #users
     #directors
     #name
+    #categoryToProduction
         constructor(name = "Nombre del sistema") {
             if(VideoSystem.#instance) {
                 return VideoSystem.#instance
@@ -20,6 +23,7 @@ class VideoSystem {
             this.#categories = new Map()
             this.#users = new Map()
             this.#directors = new Map()
+            this.#categoryToProduction = new Map()
 
            VideoSystem.#instance = this
         }
@@ -52,7 +56,7 @@ class VideoSystem {
                 }
                 this.#categories.set(c.name, c)
             }
-            return this.#categories.size
+            return this.#categories.size()
         }
 
         removeCategory(...categories){
@@ -65,7 +69,7 @@ class VideoSystem {
                 }
                 this.#categories.delete(c.name)
             }
-            return this.#categories.size
+            return this.#categories.size()
         }
 
         get users() {
@@ -87,7 +91,7 @@ class VideoSystem {
                 }
                 this.#users.set(u.username, u)  
             }
-            return this.#users.size
+            return this.#users.size()
         }
 
         removeUser(...users){
@@ -100,7 +104,7 @@ class VideoSystem {
                 }
                 this.#users.delete(u.username)
             }
-            return this.#users.size
+            return this.#users.size()
         }
 
         get productions() {
@@ -117,7 +121,7 @@ class VideoSystem {
                 }
                 this.#productions.set(p.title, p)
             }
-            return this.#productions.size
+            return this.#productions.size()
         }
 
         removeProductions(...productions) {
@@ -130,7 +134,84 @@ class VideoSystem {
                 }
                 this.#productions.delete(p.title)
             }
+            return this.#productions.size()
         }
+
+        get actors() {
+            return this.#actors.values()
+        }
+
+        addActor(...actors) {
+            for(const a of actors) {
+                if(a === null || !(a instanceof Person)) {
+                    throw new Error("El actor no puede ser null o no se un Person")
+                }
+                if(this.#actors.has(a.name)) {
+                    throw new Error("Error. Ya existe ese actor")
+                }
+                this.#actors.set(a.name, a)
+            }
+            return this.#actors.size()
+        }
+
+        removeActor(...actors) {
+            for(const a of actors) {
+                if(a ===  null || !(a instanceof Person)) {
+                    throw new Error("Error. El actor no debe ser null o ser una Persona")
+                }
+                if(!this.#actors.has(a.name)) {
+                    throw new Error("Error: El actor debe de existir")
+                }
+                this.#actors.delete(a.name)
+            }
+            return this.#directors.size()
+
+        }
+
+        get directors() {
+            return this.#directors.values()
+        }
+
+        addDirectors(...directors) {
+            for(const d of directors) {
+                if(d === null || !(d instanceof Person)) {
+                    throw new Error("Error el director no puede ser null o no ser una Persona")
+                }
+                if(this.#directors.has(d.name)) {
+                    throw new Error("El director ya existe")
+                }
+                this.#directors.set(d.name, d)
+            }
+            return this.#directors.size()
+        }
+
+        removeDirectors() {
+            for(const d of directors) {
+                if(d === null || !(d instanceof Person)) {
+                    throw new Error("Error el director no puede ser null o no ser una Persona")
+                }
+                if(!this.#directors.has(d.name)) {
+                    throw new Error("El director ya existe")
+                }
+                this.#directors.delete(d.name)
+            }
+        }
+
+
+        /*
+        assignCategory Asigna uno más producciones a una categoría.
+Si el objeto Category o Production no existen se
+añaden al sistema.
+-Category
+-Production
+Number con el nº
+total de producciones
+asignadas a la
+categoría.
+- Category es null
+- Production es null.
+
+        */
 
 
 }
