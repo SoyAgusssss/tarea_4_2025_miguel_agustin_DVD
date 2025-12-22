@@ -197,6 +197,51 @@ class VideoSystem {
             }
         }
 
+        assignCategory(category, ...productions) {
+            if(!(category instanceof Category)) {
+                throw new Error("Error no es una categoría")
+            }
+            if(!this.#categories.has(category.name)) {
+                this.#categories.set(category.name, category)
+            }
+            if(!this.#categoryToProduction.has(category)) {
+                this.#categoryToProduction.set(category, new Set())
+            }
+
+            for(const p of productions) {
+                if(!(p instanceof Production)) {
+                    throw new Error("Error no es una producción")
+                }
+                if(!this.#productions.has(p.title)) {
+                    this.#productions.set(p.title, p)
+                }
+                this.#categoryToProduction.get(category).add(p)
+            }
+
+            return this.#categoryToProduction.get(category).size()
+        }
+
+        deassignCategory(category, ...productions) {
+            if (category === null || !(category instanceof Category)) {
+                throw new Error("Category es null o no válida");
+            }
+
+            if (!this.#categoryToProduction.has(category)) {
+                this.#categoryToProduction.set(category, new Set());
+            }
+
+            for (const p of productions) {
+
+                if (p === null || !(p instanceof Production)) {
+                    throw new Error("Production es null o no válida");
+                }
+
+                this.#categoryToProduction.get(category).delete(p);
+            }
+
+            return this.#categoryToProduction.get(category).size;
+        }
+
 
         /*
         assignCategory Asigna uno más producciones a una categoría.
