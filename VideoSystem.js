@@ -13,6 +13,7 @@ class VideoSystem {
     #directors
     #name
     #categoryToProduction
+    #directorToProduction
         constructor(name = "Nombre del sistema") {
             if(VideoSystem.#instance) {
                 return VideoSystem.#instance
@@ -23,6 +24,7 @@ class VideoSystem {
             this.#categories = new Map()
             this.#users = new Map()
             this.#directors = new Map()
+            this.#categoryToProduction = new Map()
             this.#categoryToProduction = new Map()
 
            VideoSystem.#instance = this
@@ -56,7 +58,7 @@ class VideoSystem {
                 }
                 this.#categories.set(c.name, c)
             }
-            return this.#categories.size()
+            return this.#categories.size
         }
 
         removeCategory(...categories){
@@ -69,7 +71,7 @@ class VideoSystem {
                 }
                 this.#categories.delete(c.name)
             }
-            return this.#categories.size()
+            return this.#categories.size
         }
 
         get users() {
@@ -91,7 +93,7 @@ class VideoSystem {
                 }
                 this.#users.set(u.username, u)  
             }
-            return this.#users.size()
+            return this.#users.size
         }
 
         removeUser(...users){
@@ -108,7 +110,7 @@ class VideoSystem {
         }
 
         get productions() {
-            return this.#productions.values()
+            return this.#productions.values
         }
 
         addProductions(...productions){
@@ -121,7 +123,7 @@ class VideoSystem {
                 }
                 this.#productions.set(p.title, p)
             }
-            return this.#productions.size()
+            return this.#productions.size
         }
 
         removeProductions(...productions) {
@@ -134,11 +136,11 @@ class VideoSystem {
                 }
                 this.#productions.delete(p.title)
             }
-            return this.#productions.size()
+            return this.#productions.size
         }
 
         get actors() {
-            return this.#actors.values()
+            return this.#actors.values
         }
 
         addActor(...actors) {
@@ -151,7 +153,7 @@ class VideoSystem {
                 }
                 this.#actors.set(a.name, a)
             }
-            return this.#actors.size()
+            return this.#actors.size
         }
 
         removeActor(...actors) {
@@ -164,7 +166,7 @@ class VideoSystem {
                 }
                 this.#actors.delete(a.name)
             }
-            return this.#directors.size()
+            return this.#directors.size
 
         }
 
@@ -182,7 +184,7 @@ class VideoSystem {
                 }
                 this.#directors.set(d.name, d)
             }
-            return this.#directors.size()
+            return this.#directors.size
         }
 
         removeDirectors() {
@@ -218,29 +220,67 @@ class VideoSystem {
                 this.#categoryToProduction.get(category).add(p)
             }
 
-            return this.#categoryToProduction.get(category).size()
+            return this.#categoryToProduction.get(category).size
         }
 
         deassignCategory(category, ...productions) {
             if (category === null || !(category instanceof Category)) {
                 throw new Error("Category es null o no válida");
             }
-
-            if (!this.#categoryToProduction.has(category)) {
-                this.#categoryToProduction.set(category, new Set());
+             if (!this.#categoryToProduction.has(category)) {
+                throw new Error("La categoría no tiene producciones asignadas");
             }
-
             for (const p of productions) {
-
                 if (p === null || !(p instanceof Production)) {
                     throw new Error("Production es null o no válida");
                 }
-
                 this.#categoryToProduction.get(category).delete(p);
             }
-
             return this.#categoryToProduction.get(category).size;
         }
+
+        assignDirector(director, ...productions) {
+            if(director === null || !(director instanceof Person)) {
+                throw new Error("Error en asignar director, no puede ser null o no ser una persona")
+            }
+
+            if(!this.#directors.has(director.name)) {
+                this.#directors.set(director.name, director)
+            }
+            if(!this.#directorToProduction.has(director)) {
+                this.#directorToProduction.set(director, new Set())
+            }
+
+            for(const p of productions) {
+                if(p === null || !(p instanceof Production)) {
+                    throw new Error("Error en asignar director, no puede ser null o ser una Persona")
+                }
+                if(!this.#productions.has(p.title)) {
+                    this.#productions.set(p.title, p)
+                }
+                this.#directorToProduction.get(director).add(p)
+            }
+        }
+
+        deassingDirector(director, ...productions) {
+            if(director === null || !(director instanceof Person)) {
+                throw new Error("Para deasignar no puede ser null y tiene que ser una persona")
+            }
+            if(!this.#directorToProduction.has(director)) {
+                throw new Error("No hay producciones con ese director")
+            }
+            for(const p of productions) {
+                if(p === null || !(p instanceof Production)) {
+                    throw new Error("Para deasignar no puede ser null o no ser una Persona")
+                }
+                this.#directorToProduction.get(director).delete(p)
+            }
+            return this.#directorToProduction.get(director).size
+        }
+
+
+
+
 
 
         /*
