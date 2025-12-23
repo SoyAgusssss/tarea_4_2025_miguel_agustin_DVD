@@ -34,7 +34,7 @@ class VideoSystem {
 
         static getInstance(name = "Sistema de vídeo") {
             if(VideoSystem.#instance) {
-                return VideoSystem.#instance = new VideoSystem(name)
+                VideoSystem.#instance = new VideoSystem(name)
             }
             return VideoSystem.#instance
         }
@@ -115,7 +115,7 @@ class VideoSystem {
             return this.#productions.values()
         }
 
-        addProductions(...productions){
+        addProduction(...productions){
             for(const p of productions) {
                 if(p === null || !(p instanceof Production)) {
                     throw new Error("La producción no puede ser null o no ser una Producción")
@@ -128,7 +128,7 @@ class VideoSystem {
             return this.#productions.size
         }
 
-        removeProductions(...productions) {
+        removeProduction(...productions) {
             for(const p of productions) {
                 if(p  === null || !(p instanceof Production)) {
                     throw new Error("No puede ser null o no ser una producción")
@@ -168,7 +168,7 @@ class VideoSystem {
                 }
                 this.#actors.delete(a.name)
             }
-            return this.#directors.size
+            return this.#actors.size
 
         }
 
@@ -176,7 +176,7 @@ class VideoSystem {
             return this.#directors.values()
         }
 
-        addDirectors(...directors) {
+        addDirector(...directors) {
             for(const d of directors) {
                 if(d === null || !(d instanceof Person)) {
                     throw new Error("Error el director no puede ser null o no ser una Persona")
@@ -189,7 +189,7 @@ class VideoSystem {
             return this.#directors.size
         }
 
-        removeDirectors() {
+        removeDirector() {
             for(const d of directors) {
                 if(d === null || !(d instanceof Person)) {
                     throw new Error("Error el director no puede ser null o no ser una Persona")
@@ -344,10 +344,10 @@ class VideoSystem {
         }
 
         getProductionsDirector(director) {
-            if(actor === null || !(director instanceof Person)) {
+            if(director === null || !(director instanceof Person)) {
                 throw new Error("Error el director no debe ser null o ser una Persona")
             }
-            if(!this.#directorToProduction.has(director.name)) {
+            if(!this.#directorToProduction.has(director)) {
                 throw new Error("El director debe de existir en la producción")
             }
             return this.#directorToProduction.get(director).values()
@@ -357,7 +357,7 @@ class VideoSystem {
             if(category === null || !(category instanceof Category)) {
                 throw new Error("La categoría no puede ser nula o debe ser una categoría")
             }
-            if(!this.#categoryToProduction.has(category.name)) {
+            if(!this.#categoryToProduction.has(category)) {
                 throw new Error("Debe de haber producciones con esa categoría")
             }
             return this.#categoryToProduction.get(category).values()
@@ -388,6 +388,14 @@ class VideoSystem {
             }
             const u = new User(username, mail, password)
             return u
+        }
+
+        createCategory(name, description) {
+            if(this.#categories.has(name)) {
+                return this.#categories.get(name)
+            }
+            const c = new Category(name, description)
+            return c
         }
         /*
         assignCategory Asigna uno más producciones a una categoría.
