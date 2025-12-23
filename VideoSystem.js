@@ -320,11 +320,75 @@ class VideoSystem {
             }
         }
 
+        getCast(production) {
+            if(production === null || !(production instanceof Production)) {
+                throw new Error("La producción no puede ser null o no ser una Producción")
+            }
+            const cast = []
+            for(const [actor, productions] of this.#actorToProduction) {
+                if(productions.has(production)) {
+                    cast.push(actor)
+                } 
+            }
+            return cast.values()
+        }
 
+        getProductionsActor(actor) {
+            if(actor === null || !(actor instanceof Person)) {
+                throw new Error("El actor no puede ser null o no ser una Persona")
+            }
+            if(!this.#actorToProduction.has(actor)) {
+                throw new Error("El actor no tiene producciones asignadas")
+            }
+            return this.#actorToProduction.get(actor).values()
+        }
 
+        getProductionsDirector(director) {
+            if(actor === null || !(director instanceof Person)) {
+                throw new Error("Error el director no debe ser null o ser una Persona")
+            }
+            if(!this.#directorToProduction.has(director.name)) {
+                throw new Error("El director debe de existir en la producción")
+            }
+            return this.#directorToProduction.get(director).values()
+        }
 
+        getProductionsCategory(category) {
+            if(category === null || !(category instanceof Category)) {
+                throw new Error("La categoría no puede ser nula o debe ser una categoría")
+            }
+            if(!this.#categoryToProduction.has(category.name)) {
+                throw new Error("Debe de haber producciones con esa categoría")
+            }
+            return this.#categoryToProduction.get(category).values()
+        }
 
+        createPerson(name, lastname1, lastname2, born, picture) {
+            if(this.#actors.has(name)) {
+                return this.#actors.get(name)
+            }
+            if(this.#directors.has(name)) {
+                return this.#directors.get(name)
+            }
+            const p = new Person(name, lastname1, lastname2, born, picture)
+            return p
+        }
 
+        createProduction(title, nationality, publication, sypnopsis, image) {
+            if(this.#productions.has(title)) {
+                return this.#productions.get(title)
+            }
+
+            const p = new Production(title, nationality, publication, sypnopsis, image)
+            return p
+        }
+        createUser(username, mail, password) {
+            if(this.#users.has(username)) {
+                return this.#users.get(username)
+            }
+            const u = new User(username, mail, password)
+            return u
+        }
         /*
         assignCategory Asigna uno más producciones a una categoría.
 Si el objeto Category o Production no existen se
