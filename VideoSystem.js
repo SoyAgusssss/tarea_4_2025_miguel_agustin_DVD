@@ -30,6 +30,10 @@ class VideoSystem {
             this.#actorToProduction = new Map()
 
            VideoSystem.#instance = this
+
+            const defaultCategory = new Category("Default");
+            this.#categories.set("Default", defaultCategory);
+            this.#categoryToProduction.set(defaultCategory, new Set());
         }
 
         static getInstance(name = "Sistema de vídeo") {
@@ -63,22 +67,32 @@ class VideoSystem {
             return this.#categories.size
         }
 
-        removeCategory(...categories){
-            for(const c of categories) {
-                if(!(c instanceof Category)) {
-                    throw new Error("Debe de ser una categoría")
+        removeCategory(...categories) {
+            const defaultCategory = this.#categories.get("Default");
+
+            for (const c of categories) {
+                if (c === null || !(c instanceof Category)) {
+                    throw new Error("La categoría no puede ser null o no ser Category");
                 }
-                if(!this.#categories.has(c.name)) {
-                    throw new Error("La categoría no existe")
+                if (c.name === "Default") {
+                    throw new Error("No se puede eliminar la categoría por defecto");
                 }
-                this.#categories.delete(c.name)
+                if (!this.#categories.has(c.name)) {
+                    throw new Error("La categoría no está registrada");
+                }
+                if (this.#categoryToProduction.has(c)) {
+                    const productions = this.#categoryToProduction.get(c);
+                    for (const p of productions) {
+                        this.#categoryToProduction.get(defaultCategory).add(p);
+                    }
+                    this.#categoryToProduction.delete(c);
+                }
+
+                this.#categories.delete(c.name);
             }
-            return this.#categories.size
+            return this.#categories.size;
         }
 
-        get users() {
-            return this.#users.values()
-        }
 
         addUser(...users) {
             for(const u of users) {
@@ -397,20 +411,4 @@ class VideoSystem {
             const c = new Category(name, description)
             return c
         }
-        /*
-        assignCategory Asigna uno más producciones a una categoría.
-Si el objeto Category o Production no existen se
-añaden al sistema.
--Category
--Production
-Number con el nº
-total de producciones
-asignadas a la
-categoría.
-- Category es null
-- Production es null.
-
-        */
-
-
 }
