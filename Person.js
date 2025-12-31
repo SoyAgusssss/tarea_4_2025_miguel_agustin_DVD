@@ -31,6 +31,7 @@ class Person {
         if(!v || typeof v !== 'string') {
             throw new Error("Error al poner el primer Apellido")
         }
+        return this.#lastname1 = v
     }
 
     get lastname2() {
@@ -41,6 +42,7 @@ class Person {
         if(typeof v !== 'string') {
             throw new Error("Error al poner el segundo apellido")
         }
+        return this.#lastname2 = v
     }
 
     get born() {
@@ -48,9 +50,10 @@ class Person {
     }
 
     set born(v){
-        if(!v || !(born instanceof Date)) {
-            throw new Error("Error al poner el nombre")
+        if(!v || !(v instanceof Date)) {
+            throw new Error("Error al poner la fecha de nacimiento")
         }
+        return this.#born = v
     }
 
     get picture() {
@@ -61,6 +64,7 @@ class Person {
         if(typeof v !== 'string') {
             throw new Error("Error al poner la imagen")
         }
+        return this.#picture = v
     }
 
     toString() {

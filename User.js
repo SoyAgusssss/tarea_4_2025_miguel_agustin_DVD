@@ -24,7 +24,7 @@ class User {
     }
 
     set mail(v) {
-        if(!v || typeof mail !== 'string') {
+        if(!v || typeof v !== 'string') {
             throw new Error("Error en el mail")
         }
         this.#mail =  v

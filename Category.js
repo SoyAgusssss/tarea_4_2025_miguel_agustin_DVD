@@ -1,7 +1,7 @@
 class Category {
     #name
     #description
-    constructor(name, description) {
+    constructor(name, description = "") {
         this.name = name
         this.description = description
     }
@@ -14,7 +14,7 @@ class Category {
         if(!v || typeof v !== 'string') {
             throw new Error("Error al poner el nombre de la categoría")
         }
-        this.#name = v
+        return this.#name = v
     }
 
     get description() {

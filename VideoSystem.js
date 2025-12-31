@@ -37,7 +37,7 @@ class VideoSystem {
         }
 
         static getInstance(name = "Sistema de vídeo") {
-            if(VideoSystem.#instance) {
+            if(!VideoSystem.#instance) {
                 VideoSystem.#instance = new VideoSystem(name)
             }
             return VideoSystem.#instance
@@ -203,7 +203,7 @@ class VideoSystem {
             return this.#directors.size
         }
 
-        removeDirector() {
+        removeDirector(... director) {
             for(const d of directors) {
                 if(d === null || !(d instanceof Person)) {
                     throw new Error("Error el director no puede ser null o no ser una Persona")
@@ -411,4 +411,31 @@ class VideoSystem {
             const c = new Category(name, description)
             return c
         }
+
+        findProductions(filterFn, sortFn) {
+            if (typeof filterFn !== 'function') {
+                throw new Error("Se necesita una función de filtrado válida");
+            }
+            let result = Array.from(this.#productions.values()).filter(filterFn);
+            if (sortFn && typeof sortFn === 'function') {
+                result.sort(sortFn);
+            }
+            return result[Symbol.iterator]();
+        }
+
+        filterProductionsInCategory(category, filterFn, sortFn) {
+            if (!(category instanceof Category)) {
+                throw new Error("Category es null o no válida");
+            }
+            if (!this.#categoryToProduction.has(category)) {
+                throw new Error("La categoría no está registrada");
+            }
+            let productions = Array.from(this.#categoryToProduction.get(category)).filter(filterFn);
+            if (sortFn && typeof sortFn === 'function') {
+                productions.sort(sortFn);
+            }
+            return productions[Symbol.iterator]();
+        }
 }
+
+export default VideoSystem
