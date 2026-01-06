@@ -93,6 +93,10 @@ class VideoSystem {
             return this.#categories.size;
         }
 
+        get users() {
+            return this.#users.values();
+        }
+
 
         addUser(...users) {
             for(const u of users) {
