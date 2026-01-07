@@ -1,3 +1,6 @@
+import List from "./List.js";
+import { InvalidTypeException } from "./exception.js";
+
 class ObjectList extends List {
     #type;
 
@@ -22,3 +25,5 @@ class ObjectList extends List {
         return this.#type;
     }
 }
+
+export default ObjectList

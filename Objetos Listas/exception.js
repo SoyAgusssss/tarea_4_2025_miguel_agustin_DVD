@@ -10,3 +10,5 @@ class EmptyListException extends ListException {}
 class IndexOutOfBoundsException extends ListException {}
 class InvalidTypeException extends ListException {}
 class DuplicateElementException extends ListException {}
+
+export { ListException, FullListException, EmptyListException, IndexOutOfBoundsException, InvalidTypeException, DuplicateElementException };

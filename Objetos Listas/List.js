@@ -1,3 +1,5 @@
+import { FullListException, EmptyListException, IndexOutOfBoundsException } from "./exception.js";
+
 class List {
     #elements;
     #capacity;
@@ -67,6 +69,34 @@ class List {
         return this.#elements.splice(index, 1)[0];
     }
 
+    removeElement(elem) {
+        const index = this.indexOf(elem);
+        if (index !== -1) {
+            return this.remove(index);
+        }
+        return null;
+    }
+
+    set(elem, index) {
+        if (index < 0 || index >= this.size())
+            throw new IndexOutOfBoundsException("Índice fuera de rango");
+        this.#elements[index] = elem;
+    }
+
+    contains(elem) {
+        return this.indexOf(elem) !== -1;
+    }
+
+    subList(from, to) {
+        if (from < 0 || to > this.size() || from > to)
+            throw new IndexOutOfBoundsException("Rango inválido");
+        const sub = new List(this.capacity());
+        for (let i = from; i < to; i++) {
+            sub.add(this.#elements[i]);
+        }
+        return sub;
+    }
+
     clear() {
         this.#elements.length = 0;
     }
@@ -79,3 +109,5 @@ class List {
         return this.#elements;
     }
 }
+
+export default List
