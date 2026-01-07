@@ -8,6 +8,12 @@ function testVideoSystem() {
     console.log("==== TEST VIDEO SYSTEM ====");
 
     const vs = VideoSystem.getInstance("Miguel VideoSystem");
+    const vs2 = VideoSystem.getInstance("Otro Miguel VideoSystem");
+
+    console.log(vs.name);
+    console.log(vs2.name);
+    console.log("Singleton:", vs === vs2);
+
 
     // Crear categorías
     const catAction = vs.createCategory("Acción", "Películas de acción");
