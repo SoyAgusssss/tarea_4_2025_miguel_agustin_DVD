@@ -1,3 +1,4 @@
+// Clase User.js
 class User {
     #username
     #mail
@@ -8,6 +9,7 @@ class User {
         this.password = password
     }
 
+    // Getters y Setters
     get username() {
         return this.#username
     }
@@ -40,6 +42,8 @@ class User {
         }
         this.#password = v
     }
+
+    // Método toString
     toString() {
         return `Usuario: ${this.username} | Email: ${this.mail}`
     }

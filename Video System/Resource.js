@@ -1,3 +1,4 @@
+// Clase Resource.js
 class Resource{
     #duration
     #link
@@ -6,6 +7,7 @@ class Resource{
         this.link = link
     }
 
+    // Getters y Setters
     get duration() {
         return this.#duration
     }
@@ -28,18 +30,10 @@ class Resource{
         this.#link = v
     }
 
+    // Método toString
     toString() {
         return  `Duración ${this.duration} | Link: ${this.link}`
     }
 }
 
 export default Resource
-
-/*
-1.3. Objeto Resource
-Representa un recurso audiovisual.
-Propiedad Tipo Obligatorio Descripción
-duration Number Si Nº de minutos de la película.
-link String Si Ruta donde se ubica el recurso.
-
-*/

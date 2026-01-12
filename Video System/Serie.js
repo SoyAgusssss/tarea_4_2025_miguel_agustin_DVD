@@ -2,6 +2,7 @@ import Production from "./Production.js";
 import Resource from "./Resource.js";
 import Resource from "./Coordinate.js";
 
+// Clase Serie.js
 class Serie {
     #resource
     #locations
@@ -13,6 +14,7 @@ class Serie {
         this.seasons = seasons
     }
 
+    // Getters y Setters
     get resource() {
         return this.#resource
     }
@@ -56,6 +58,7 @@ class Serie {
         this.#seasons = v
     }
 
+    // Método toString  
     toString() {
         return `Produccion: ${super.toString()} | Recursos: ${this.resource} | Localización: ${this.locations} | Temporadas: ${this.seasons}`
     }

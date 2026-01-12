@@ -1,3 +1,4 @@
+// Clase Production.js
 class Production {
     #title
     #nationality
@@ -12,6 +13,7 @@ class Production {
         this.image = image
     }
 
+    // Getters y Setters
     get title() {
         return this.#title
     }
@@ -67,6 +69,7 @@ class Production {
         this.#image = v
     }
 
+    // Método toString
     toString() {
         return `Título: ${this.title} | Nacionalidad: ${this.nationality} | Publicación: ${this.publication} | Sipnosis: ${this.sypnopsis} | Imagen: ${this.image}`
     }

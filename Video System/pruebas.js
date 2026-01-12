@@ -4,6 +4,7 @@ import User from "./User.js";
 import Person from "./Person.js";
 import Production from "./Production.js";
 
+// Función de prueba
 function testVideoSystem() {
     console.log("==== TEST VIDEO SYSTEM ====");
 

@@ -3,7 +3,7 @@ import User from "./User.js"
 import Production from "./Production.js"
 import Person from "./Person.js"
 
-
+// Clase VideoSystem.js
 class VideoSystem {
     static #instance
     #actors
@@ -36,6 +36,7 @@ class VideoSystem {
             this.#categoryToProduction.set(defaultCategory, new Set());
         }
 
+        // Método getInstance
         static getInstance(name = "Sistema de vídeo") {
             if(!VideoSystem.#instance) {
                 VideoSystem.#instance = new VideoSystem(name)
@@ -43,6 +44,7 @@ class VideoSystem {
             return VideoSystem.#instance
         }
 
+        // Getters y Setters
         get name() {
             return this.#name
         }
@@ -54,6 +56,7 @@ class VideoSystem {
         this.#name = v;
         }
 
+        // Añadir categorías
         addCategory(...categories) {
             for(const c of categories) {
                 if(!c || !(c instanceof Category)) {
@@ -67,6 +70,7 @@ class VideoSystem {
             return this.#categories.size
         }
 
+        // Eliminar categorías
         removeCategory(...categories) {
             const defaultCategory = this.#categories.get("Default");
 
@@ -97,7 +101,7 @@ class VideoSystem {
             return this.#users.values();
         }
 
-
+        // Añadir usuarios
         addUser(...users) {
             for(const u of users) {
                 if (u === null || !(u instanceof User)) {
@@ -116,6 +120,7 @@ class VideoSystem {
             return this.#users.size
         }
 
+        // Eliminar usuarios
         removeUser(...users){
             for(const u of users) {
                 if(u === null || !(u instanceof User)) {
@@ -129,10 +134,12 @@ class VideoSystem {
             return this.#users.size
         }
 
+        // Gestión de producciones
         get productions() {
             return this.#productions.values()
         }
 
+        // Añadir producciones
         addProduction(...productions){
             for(const p of productions) {
                 if(p === null || !(p instanceof Production)) {
@@ -146,6 +153,7 @@ class VideoSystem {
             return this.#productions.size
         }
 
+        // Eliminar producciones
         removeProduction(...productions) {
             for(const p of productions) {
                 if(p  === null || !(p instanceof Production)) {
@@ -163,6 +171,7 @@ class VideoSystem {
             return this.#actors.values()
         }
 
+        // Añadir actores
         addActor(...actors) {
             for(const a of actors) {
                 if(a === null || !(a instanceof Person)) {
@@ -176,6 +185,7 @@ class VideoSystem {
             return this.#actors.size
         }
 
+        // Eliminar actores
         removeActor(...actors) {
             for(const a of actors) {
                 if(a ===  null || !(a instanceof Person)) {
@@ -190,10 +200,12 @@ class VideoSystem {
 
         }
 
+        // Devolver directores
         get directors() {
             return this.#directors.values()
         }
 
+        // Añadir directores
         addDirector(...directors) {
             for(const d of directors) {
                 if(d === null || !(d instanceof Person)) {
@@ -207,6 +219,7 @@ class VideoSystem {
             return this.#directors.size
         }
 
+        // Eliminar directores
         removeDirector(... director) {
             for(const d of directors) {
                 if(d === null || !(d instanceof Person)) {
@@ -219,6 +232,7 @@ class VideoSystem {
             }
         }
 
+        // Asignar categorías a producciones
         assignCategory(category, ...productions) {
             if(!(category instanceof Category)) {
                 throw new Error("Error no es una categoría")
@@ -243,6 +257,7 @@ class VideoSystem {
             return this.#categoryToProduction.get(category).size
         }
 
+        // Deasignar categorías de producciones
         deassignCategory(category, ...productions) {
             if (category === null || !(category instanceof Category)) {
                 throw new Error("Category es null o no válida");
@@ -259,6 +274,7 @@ class VideoSystem {
             return this.#categoryToProduction.get(category).size;
         }
 
+        // Asignar directores a producciones
         assignDirector(director, ...productions) {
             if(director === null || !(director instanceof Person)) {
                 throw new Error("Error en asignar director, no puede ser null o no ser una persona")
@@ -283,6 +299,7 @@ class VideoSystem {
             return this.#directorToProduction.get(director).size
         }
 
+        // Deasignar directores de producciones
         deassingDirector(director, ...productions) {
             if(director === null || !(director instanceof Person)) {
                 throw new Error("Para deasignar director no puede ser null y tiene que ser una persona")
@@ -299,6 +316,7 @@ class VideoSystem {
             return this.#directorToProduction.get(director).size
         }
 
+        // Asignar actores a producciones
         assignActor(actor, ...productions) {
             if(actor === null || !(actor instanceof Person)) {
                 throw new Error("Para asignar actor no debe de ser null o ser una Persona")
@@ -322,6 +340,7 @@ class VideoSystem {
             return this.#actorToProduction.get(actor).size
         }
 
+        // Deasignar actores de producciones
         deassignActor(actor, ...productions) {
             if(actor === null || !(actor instanceof Person)) {
                 throw new Error("El actor para deasignar no puede ser null o no ser una Persona")
@@ -338,6 +357,7 @@ class VideoSystem {
             }
         }
 
+        // Obtener el cast de una producción
         getCast(production) {
             if(production === null || !(production instanceof Production)) {
                 throw new Error("La producción no puede ser null o no ser una Producción")
@@ -351,6 +371,7 @@ class VideoSystem {
             return cast.values()
         }
 
+        // Obtener producciones de un actor
         getProductionsActor(actor) {
             if(actor === null || !(actor instanceof Person)) {
                 throw new Error("El actor no puede ser null o no ser una Persona")
@@ -361,6 +382,7 @@ class VideoSystem {
             return this.#actorToProduction.get(actor).values()
         }
 
+        // Obtener producciones de un director
         getProductionsDirector(director) {
             if(director === null || !(director instanceof Person)) {
                 throw new Error("Error el director no debe ser null o ser una Persona")
@@ -371,6 +393,7 @@ class VideoSystem {
             return this.#directorToProduction.get(director).values()
         }
 
+        // Obtener producciones de una categoría
         getProductionsCategory(category) {
             if(category === null || !(category instanceof Category)) {
                 throw new Error("La categoría no puede ser nula o debe ser una categoría")
@@ -381,6 +404,7 @@ class VideoSystem {
             return this.#categoryToProduction.get(category).values()
         }
 
+        // Crear personas
         createPerson(name, lastname1, lastname2, born, picture) {
             if(this.#actors.has(name)) {
                 return this.#actors.get(name)
@@ -392,6 +416,7 @@ class VideoSystem {
             return p
         }
 
+        // Crear producciones
         createProduction(title, nationality, publication, sypnopsis, image) {
             if(this.#productions.has(title)) {
                 return this.#productions.get(title)
@@ -400,6 +425,8 @@ class VideoSystem {
             const p = new Production(title, nationality, publication, sypnopsis, image)
             return p
         }
+
+        //  Crear usuarios
         createUser(username, mail, password) {
             if(this.#users.has(username)) {
                 return this.#users.get(username)
@@ -408,6 +435,7 @@ class VideoSystem {
             return u
         }
 
+        // Crear categorías
         createCategory(name, description) {
             if(this.#categories.has(name)) {
                 return this.#categories.get(name)
@@ -416,6 +444,7 @@ class VideoSystem {
             return c
         }
 
+        // Búsqueda avanzada de producciones
         findProductions(filterFn, sortFn) {
             if (typeof filterFn !== 'function') {
                 throw new Error("Se necesita una función de filtrado válida");
@@ -427,6 +456,7 @@ class VideoSystem {
             return result[Symbol.iterator]();
         }
 
+        // Búsqueda avanzada de producciones en una categoría
         filterProductionsInCategory(category, filterFn, sortFn) {
             if (!(category instanceof Category)) {
                 throw new Error("Category es null o no válida");

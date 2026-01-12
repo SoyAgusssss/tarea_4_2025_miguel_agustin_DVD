@@ -1,3 +1,4 @@
+// Clase Coordinate
 class Coordinate {
     #latitude
     #longitude
@@ -6,7 +7,7 @@ class Coordinate {
         this.latitude = latitude
         this.longitude = longitude
     }
-
+    // Getters y Setters
     get latitude() {
         return this.#latitude
     }
@@ -29,6 +30,7 @@ class Coordinate {
         this.#longitude = v
     }
     
+    // Método toString
     toString() {
         return `Latitud: ${this.latitude} | Longitud: ${this.longitude}`
     }

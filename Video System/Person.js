@@ -1,3 +1,4 @@
+// Clase Person.js
 class Person {
     #name
     #lastname1
@@ -11,7 +12,7 @@ class Person {
         this.born = born;
         this.picture = picture
     }
-
+    // Getters y Setters
     get name() {
         return this.#name
     }
@@ -66,7 +67,8 @@ class Person {
         }
         return this.#picture = v
     }
-
+    
+    // Método toString
     toString() {
         return `Nombre: ${this.name} | Primer Apellido: ${this.lastname1} | Segundo Apellido: ${this.lastname2} | Nacimiento: ${this.born} | Imagen: ${this.picture}`
     }

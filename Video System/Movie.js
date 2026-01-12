@@ -1,7 +1,7 @@
 import Production from "./Production.js";
 import Resource from "./Resource.js";
 import Coordinate from "./Coordinate.js";
-
+// Clase Movie
 class Movie extends Production {
     #resource
     #locations
@@ -10,7 +10,7 @@ class Movie extends Production {
         this.resource = resource
         this.locations = locations
     }
-
+    // Getters y Setters
     get resource() {
         return this.#resource
     }
@@ -38,7 +38,7 @@ class Movie extends Production {
         }
         this.#locations = v
     }
-
+    // Método toString
     toString() {
         return `Produccion: ${super.toString()} | Recurso: ${this.resource} | Localización: ${this.locations} `
     }

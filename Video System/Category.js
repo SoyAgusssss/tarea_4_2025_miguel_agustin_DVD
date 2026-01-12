@@ -1,3 +1,4 @@
+// Clase categoría
 class Category {
     #name
     #description
@@ -5,7 +6,7 @@ class Category {
         this.name = name
         this.description = description
     }
-
+    // Getters y Setters
     get name() {
         return this.#name
     }
@@ -14,7 +15,7 @@ class Category {
         if(!v || typeof v !== 'string') {
             throw new Error("Error al poner el nombre de la categoría")
         }
-        return this.#name = v
+        this.#name = v
     }
 
     get description() {
@@ -27,7 +28,7 @@ class Category {
         }
         this.#description = v
     }
-
+    // Método toString
     toString() {
         return `Nombre: ${this.name} | Descripción: ${this.description}`
     }
