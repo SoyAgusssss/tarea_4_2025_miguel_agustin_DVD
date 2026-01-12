@@ -24,10 +24,10 @@ function testLists() {
     list.addAt(0, 0);
     console.log("Después de addAt(0, 0):", list.toString());
 
-    // get
+    // Get
     console.log("get(1):", list.get(1));
 
-    // set
+    // Set
     list.set(99, 1);
     console.log("Después de set(99, 1):", list.toString());
 
@@ -36,22 +36,22 @@ function testLists() {
     console.log("lastIndexOf(2):", list.lastIndexOf(2));
     console.log("contains(99):", list.contains(99));
 
-    // firstElement, lastElement
+    // Primer elemento, último elemento
     console.log("firstElement():", list.firstElement());
     console.log("lastElement():", list.lastElement());
 
-    // subList
+    // 
     console.log("subList(1, 3):", list.subList(1, 3).toString());
 
-    // remove
+    // Eliminar
     list.remove(1);
     console.log("Después de remove(1):", list.toString());
 
-    // removeElement
+    // Eliminar por índice
     list.removeElement(3);
     console.log("Después de removeElement(3):", list.toString());
 
-    // clear
+    // Limpiar
     list.clear();
     console.log("Después de clear():", list.toString());
     console.log("size():", list.size());
@@ -114,7 +114,7 @@ function testLists() {
     console.log("type:", orderedBooks.type.name);
     console.log("order (función):", typeof orderedBooks.order);
 
-    // Agregar en orden inverso, pero se ordena automáticamente
+    // Agregar en orden inverso
     orderedBooks.add(b2)
     orderedBooks.add(b1);
     orderedBooks.add(b3);
